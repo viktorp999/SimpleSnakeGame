@@ -27,14 +27,17 @@ namespace SimpleSnakeGame
             {
                 _isgoLeft = true;
             }
+
             if (e.KeyCode == Keys.Right && Settings.direction != "left")
             {
                 _isgoRight = true;
             }
+
             if (e.KeyCode == Keys.Up && Settings.direction != "down")
             {
                 _isgoUp = true;
             }
+
             if (e.KeyCode == Keys.Down && Settings.direction != "up")
             {
                 _isgoDown = true;
@@ -47,14 +50,17 @@ namespace SimpleSnakeGame
             {
                 _isgoLeft = false;
             }
+
             if (e.KeyCode == Keys.Right)
             {
                 _isgoRight = false;
             }
+
             if (e.KeyCode == Keys.Up)
             {
                 _isgoUp = false;
             }
+
             if (e.KeyCode == Keys.Down)
             {
                 _isgoDown = false;
@@ -72,18 +78,22 @@ namespace SimpleSnakeGame
             {
                 Settings.direction = "right";
             }
+
             if (_isgoLeft)
             {
                 Settings.direction = "left";
             }
+
             if (_isgoUp)
             {
                 Settings.direction = "up";
             }
+
             if (_isgoDown)
             {
                 Settings.direction = "down";
             }
+
             for (int i = _snake.Count - 1; i >= 0; i--)
             {
                 if (i == 0)
@@ -93,36 +103,45 @@ namespace SimpleSnakeGame
                         case "left":
                             _snake[i].X--;
                             break;
+
                         case "right":
                             _snake[i].X++;
                             break;
+
                         case "up":
                             _snake[i].Y--;
                             break;
+
                         case "down":
                             _snake[i].Y++;
                             break;
                     }
+
                     if (_snake[i].X < 0)
                     {
                         _snake[i].X = _maxWidth;
                     }
+
                     if (_snake[i].X > _maxWidth)
                     {
                         _snake[i].X = 0;
                     }
+
                     if (_snake[i].Y < 0)
                     {
                         _snake[i].Y = _maxHeight;
                     }
+
                     if (_snake[i].Y > _maxHeight)
                     {
                         _snake[i].Y = 0;
                     }
+
                     if (_snake[i].X == _food.X && _snake[i].Y == _food.Y)
                     {
                         EatFood();
                     }
+
                     for (int j = 1; j < _snake.Count; j++)
                     {
                         if(_snake[i].X == _snake[j].X && _snake[i].Y == _snake[j].Y)
@@ -131,12 +150,14 @@ namespace SimpleSnakeGame
                         }
                     }
                 }
+
                 else
                 {
                     _snake[i].X = _snake[i - 1].X;
                     _snake[i].Y = _snake[i - 1].Y;
                 }
             }
+
             SnakeGraphicsPicBox.Invalidate();
         }
 
@@ -144,18 +165,22 @@ namespace SimpleSnakeGame
         {
             Graphics canvas = e.Graphics;
             Brush snakeColour;
+
             for(int i = 0; i < _snake.Count; i++ )
             {
                 if (i == 0)
                 {
                     snakeColour = Brushes.White;
                 }
+
                 else
                 {
                     snakeColour = Brushes.Gray;
                 }
+
                 canvas.FillEllipse(snakeColour, new Rectangle(_snake[i].X * Settings.Width, _snake[i].Y * Settings.Height, Settings.Width, Settings.Height));
             }
+
             canvas.FillEllipse(Brushes.Green, new Rectangle(_food.X * Settings.Width, _food.Y * Settings.Height, Settings.Width, Settings.Height));
         }
 
@@ -172,14 +197,26 @@ namespace SimpleSnakeGame
             StartB.Enabled = false;
             _score = 0;
             ScoreL.Text = "Score: " + _score;
-            Circle head = new Circle { X = 20, Y = 20 };
+            Circle head = new Circle 
+            { 
+                X = 20, 
+                Y = 20 
+            };
+
             _snake.Add(head);
+
             for (int i = 0; i < 10; i++)
             {
                 Circle body = new Circle();
                 _snake.Add(body);
             }
-            _food = new Circle {X = _rand.Next(2, _maxWidth), Y= _rand.Next(2, _maxHeight) };
+
+            _food = new Circle 
+            {
+                X = _rand.Next(2, _maxWidth), 
+                Y= _rand.Next(2, _maxHeight) 
+            };
+
             GameTimer.Start();
         }
 
@@ -187,7 +224,12 @@ namespace SimpleSnakeGame
         {
             _score += 1;
             ScoreL.Text = "Score " + _score;
-            Circle body = new Circle {X = _snake[_snake.Count - 1].X, Y = _snake[_snake.Count - 1].Y};
+            Circle body = new Circle 
+            {
+                X = _snake[_snake.Count - 1].X,
+                Y = _snake[_snake.Count - 1].Y
+            };
+
             _snake.Add(body);
             _food = new Circle { X = _rand.Next(2, _maxWidth), Y = _rand.Next(2, _maxHeight) };
         }
