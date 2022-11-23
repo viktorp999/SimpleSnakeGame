@@ -144,7 +144,7 @@ namespace SimpleSnakeGame
 
                     for (int j = 1; j < _snake.Count; j++)
                     {
-                        if(_snake[i].X == _snake[j].X && _snake[i].Y == _snake[j].Y)
+                        if (_snake[i].X == _snake[j].X && _snake[i].Y == _snake[j].Y)
                         {
                             GameOver();
                         }
@@ -166,7 +166,7 @@ namespace SimpleSnakeGame
             Graphics canvas = e.Graphics;
             Brush snakeColour;
 
-            for(int i = 0; i < _snake.Count; i++ )
+            for (int i = 0; i < _snake.Count; i++ )
             {
                 if (i == 0)
                 {
@@ -231,7 +231,11 @@ namespace SimpleSnakeGame
             };
 
             _snake.Add(body);
-            _food = new Circle { X = _rand.Next(2, _maxWidth), Y = _rand.Next(2, _maxHeight) };
+            _food = new Circle 
+            { 
+                X = _rand.Next(2, _maxWidth), 
+                Y = _rand.Next(2, _maxHeight) 
+            };
         }
 
         private void GameOver()
